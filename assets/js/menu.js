@@ -46,4 +46,18 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.classList.remove(...overlayClasses);
     overlay.classList.add('bg-transparent');
   });
+
+  // Close the menu when the user resizes the window
+  window.addEventListener('resize', (e) => {
+    // check if menu is open
+    const menuOpen = menu.querySelector('svg').classList.contains('open');
+    if (menuOpen && window.innerWidth > 767.98) {
+      e.preventDefault();
+      toggleMenu();
+  
+      // Hide the overlay
+      overlay.classList.remove(...overlayClasses);
+      overlay.classList.add('bg-transparent');
+    }
+  });
 });
