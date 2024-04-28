@@ -1,4 +1,4 @@
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .sidebar-container {
     @apply fixed pt-[calc(var(--navbar-height))] top-0 w-full bottom-0 z-[15] overscroll-contain bg-white dark:bg-dark;
     transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
