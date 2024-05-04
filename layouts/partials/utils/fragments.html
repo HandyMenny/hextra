@@ -20,13 +20,17 @@
 {{ end }}
 
 {{ $content := $page.RawContent }}
+{{/* Remove Katex */}}
+{{ $content = replaceRE "(\\$.*\\$)" "" $content }}
 {{ $len := len $headingKeys }}
 {{ $data := dict }}
 
 {{ if eq $type "content" }}
   {{/* Include full content of the page */}}
   {{ if eq $len 0 }}
-    {{ $data = $data | merge (dict "" ($page.Plain | htmlUnescape | chomp)) }}
+    {{/* Remove Katex */}}
+    {{ $plainclean := replaceRE "(\\$.*\\$)" "" ($page.Plain | htmlUnescape | chomp) }}
+    {{ $data = $data | merge (dict "" $plainclean) }}
   {{ else }}
     {{/* Split the raw content from bottom to top */}}
     {{ range seq $len }}
