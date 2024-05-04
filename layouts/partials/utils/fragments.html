@@ -26,7 +26,8 @@
 {{ if eq $type "content" }}
   {{/* Include full content of the page */}}
   {{ if eq $len 0 }}
-    {{ $data = $data | merge (dict "" ($page.Plain | htmlUnescape | chomp)) }}
+    {{- $contentRE := replaceRE "($.*$)" "" ($page.Plain | htmlUnescape | chomp) -}}
+    {{ $data = $data | merge (dict "" $contentRE) }}
   {{ else }}
     {{/* Split the raw content from bottom to top */}}
     {{ range seq $len }}
